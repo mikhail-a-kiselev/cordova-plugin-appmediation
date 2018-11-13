@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-appmediation" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<name>appmediation cordova plugin</name>
+<js-module name="cordova-plugin-appmediation" src="www/AppMediation.js">
+	<clobbers target="window.AppMediation" />
+</js-module>
+<platform name="android">
+	<config-file parent="/*" target="res/xml/config.xml">
+		<feature name="AppMediation">
+			<param name="android-package" value="com.codemech.appmediation.AppMediation" />
+			<param name="onload" value="true" />
+		</feature>
+	</config-file>
+	 <framework src="src/android/my.gradle" custom="true" type="gradleReference" />
+	<config-file parent="/manifest/application" target="AndroidManifest.xml">
+		<!-- appmediation and partners -->
+        <!-- StatApp -->
+        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <!-- Ogury -->
+        <receiver android:name="io.presage.receiver.NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="io.presage.receiver.NetworkChangeReceiver.ONDESTROY" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="io.presage.receiver.AlarmReceiver" />
+        <provider
+            android:name="io.presage.provider.PresageProvider"
+            android:authorities="${applicationId}.PresageProvider"
+            android:enabled="true"
+            android:exported="true" />
+	</config-file>
+	
+	<resource-file src="libs/appcompat-v7-26.1.0.aar" target="libs/appcompat-v7-26.1.0.aar" />
+	
+	<resource-file src="libs/applovin-sdk-8.0.0.jar" target="libs/applovin-sdk-8.0.0.jar" />
+	<resource-file src="libs/chartboost-7.2.0.jar" target="libs/chartboost-7.2.0.jar" />
+	<resource-file src="libs/converter-gson-2.2.0.jar" target="libs/converter-gson-2.2.0.jar" />
+	<resource-file src="libs/fetch-1.1.5.jar" target="libs/fetch-1.1.5.jar" />
+	<resource-file src="libs/gson-2.7.jar" target="libs/gson-2.7.jar" />
+	<resource-file src="libs/InMobi-7.2.1.jar" target="libs/InMobi-7.2.1.jar" />
+	<resource-file src="libs/logging-interceptor-3.7.0.jar" target="libs/logging-interceptor-3.7.0.jar" />
+	<resource-file src="libs/okhttp-3.7.0.jar" target="libs/okhttp-3.7.0.jar" />
+	<resource-file src="libs/okio-1.12.0.jar" target="libs/okio-1.12.0.jar" />
+	<resource-file src="libs/picasso-2.5.2.jar" target="libs/picasso-2.5.2.jar" />
+	<resource-file src="libs/presage-lib-2.2.12.jar" target="libs/presage-lib-2.2.12.jar" />
+	<resource-file src="libs/retrofit-2.2.0.jar" target="libs/retrofit-2.2.0.jar" />
+	<resource-file src="libs/StartAppInApp-3.8.4.jar" target="libs/StartAppInApp-3.8.4.jar" />
+	<resource-file src="libs/tapjoyconnectlibrary-11.12.2.jar" target="libs/tapjoyconnectlibrary-11.12.2.jar" />
+	<resource-file src="libs/VNG-moat-mobile-app-kit-2.2.0.jar" target="libs/VNG-moat-mobile-app-kit-2.2.0.jar" />
+	<resource-file src="libs/vungle-android-sdk-6.3.12.jar" target="libs/vungle-android-sdk-6.3.12.jar" />
+	
+	<resource-file src="libs/adcolony-3.3.3.aar" target="libs/adcolony-3.3.3.aar" />
+	<resource-file src="libs/am-android-sdk-1.11.4.aar" target="libs/am-android-sdk-1.11.4.aar" />
+	<resource-file src="libs/AudienceNetwork-4.28.2.aar" target="libs/AudienceNetwork-4.28.2.aar" />
+	<resource-file src="libs/mobvista-alphab-8.11.2.aar" target="libs/mobvista-alphab-8.11.2.aar" />
+	<resource-file src="libs/mobvista-common-8.11.2.aar" target="libs/mobvista-common-8.11.2.aar" />
+	<resource-file src="libs/mobvista-interstitial-8.11.2.aar" target="libs/mobvista-interstitial-8.11.2.aar" />
+	<resource-file src="libs/mobvista-interstitialvideo-8.11.2.aar" target="libs/mobvista-interstitialvideo-8.11.2.aar" />
+	<resource-file src="libs/mobvista-mvdownloads-8.11.2.aar" target="libs/mobvista-mvdownloads-8.11.2.aar" />
+	<resource-file src="libs/mobvista-mvjscommon-8.11.2.aar" target="libs/mobvista-mvjscommon-8.11.2.aar" />
+	<resource-file src="libs/mobvista-mvnative-8.11.2.aar" target="libs/mobvista-mvnative-8.11.2.aar" />
+	<resource-file src="libs/mobvista-nativeex-8.11.2.aar" target="libs/mobvista-nativeex-8.11.2.aar" />
+	<resource-file src="libs/mobvista-playercommon-8.11.2.aar" target="libs/mobvista-playercommon-8.11.2.aar" />
+	<resource-file src="libs/mobvista-reward-8.11.2.aar" target="libs/mobvista-reward-8.11.2.aar" />
+	<resource-file src="libs/mobvista-videocommon-8.11.2.aar" target="libs/mobvista-videocommon-8.11.2.aar" />
+	<resource-file src="libs/mobvista-videofeeds-8.11.2.aar" target="libs/mobvista-videofeeds-8.11.2.aar" />
+	<resource-file src="libs/mobvista-videojs-8.11.2.aar" target="libs/mobvista-videojs-8.11.2.aar" />
+	<resource-file src="libs/mytarget-sdk-5.1.2.aar" target="libs/mytarget-sdk-5.1.2.aar" />
+	<resource-file src="libs/unity-ads-2.2.1.aar" target="libs/unity-ads-2.2.1.aar" />
+	
+	<source-file src="src/android/AppMediation.java" target-dir="src/com/codemech/appmediation" />
+</platform>
+</plugin>

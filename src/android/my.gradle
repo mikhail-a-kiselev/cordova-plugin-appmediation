@@ -1,0 +1,35 @@
+repositories{    
+  jcenter()
+  flatDir {
+      dirs 'libs'
+   }
+}
+
+dependencies {
+    compile(name:'appcompat-v7-26.1.0', ext:'aar')
+	compile(name:'adcolony-3.3.3', ext:'aar')
+	compile(name:'am-android-sdk-1.11.4', ext:'aar')
+	compile(name:'AudienceNetwork-4.28.2', ext:'aar')
+	compile(name:'mobvista-alphab-8.11.2', ext:'aar')
+	compile(name:'mobvista-common-8.11.2', ext:'aar')
+	compile(name:'mobvista-interstitial-8.11.2', ext:'aar')
+	compile(name:'mobvista-interstitialvideo-8.11.2', ext:'aar')
+	compile(name:'mobvista-mvdownloads-8.11.2', ext:'aar')
+	compile(name:'mobvista-mvjscommon-8.11.2', ext:'aar')
+	compile(name:'mobvista-mvnative-8.11.2', ext:'aar')
+	compile(name:'mobvista-nativeex-8.11.2', ext:'aar')
+	compile(name:'mobvista-playercommon-8.11.2', ext:'aar')
+	compile(name:'mobvista-reward-8.11.2', ext:'aar')
+	compile(name:'mobvista-videocommon-8.11.2', ext:'aar')
+	compile(name:'mobvista-videofeeds-8.11.2', ext:'aar')
+	compile(name:'mobvista-videojs-8.11.2', ext:'aar')
+	compile(name:'mytarget-sdk-5.1.2', ext:'aar')
+	compile(name:'unity-ads-2.2.1', ext:'aar')
+	compile fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+android {
+    packagingOptions {
+        pickFirst  '**'
+	}
+}
