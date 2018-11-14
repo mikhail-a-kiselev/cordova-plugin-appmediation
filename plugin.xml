@@ -36,6 +36,8 @@
             android:exported="true" />
 	</config-file>
 	
+	<resource-file src="libs/multidex-1.0.3.aar" target="libs/multidex-1.0.3.aar" />
+	
 	<resource-file src="libs/appcompat-v7-26.1.0.aar" target="libs/appcompat-v7-26.1.0.aar" />
 	
 	<resource-file src="libs/applovin-sdk-8.0.0.jar" target="libs/applovin-sdk-8.0.0.jar" />

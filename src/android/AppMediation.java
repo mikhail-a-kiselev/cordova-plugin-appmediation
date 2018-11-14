@@ -4,6 +4,7 @@ package com.codemech.appmediation;
 import android.os.Bundle;
 //import android.support.annotation.NonNull;
 //import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,8 +53,10 @@ public class AppMediation extends CordovaPlugin {
         if(INIT.equals(action)){
         	JSONObject options = inputs.optJSONObject(0);
             result = initMediation(options, callbackContext);
+			Log.d("appmediation", "init");
 			return true;
         } else if(LOAD_AD.equals(action)){
+			Log.d("appmediation", "load");
 			AMBanner.show(cordova.getActivity(), Gravity.BOTTOM);
 			return true;
 		} else {
@@ -66,6 +69,8 @@ public class AppMediation extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
+				AMSDK.setTestMode(true);
+				
 				AMSDK.init(cordova.getActivity(), "a1cdd0c4-de3b-421f-a7b3-5c264c16df91");//"a1cdd0c4-de3b-421f-a7b3-5c264c16df91" options.toString()
 			}
 		});

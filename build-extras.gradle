@@ -16,10 +16,25 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
     }
+	productFlavors {
+        // Includes settings you want to keep only while developing your app.
+        dev {
+            // Enables pre-dexing for command line builds. When using
+            // Android Studio 2.3 or higher, the IDE enables pre-dexing
+            // when deploying your app to a device running Android 5.0
+            // (API level 21) or higher—regardless of what you set for
+            // minSdkVersion.
+            minSdkVersion 21
+        }
+		prod {
+			
+		}
 }
 
 dependencies {
-    compile 'com.android.support:multidex:1.0.3'
+    compile group: 'com.android.support', name: 'support-v4', version: '26.1.0'
+#    compile 'com.android.support:multidex:1.0.3'
+compile(name:'multidex-1.0.3', ext:'aar')
 	compile 'com.android.support:recyclerview-v7:26.1.0'
 	compile 'com.google.android.gms:play-services-ads:15.0.1'
 }

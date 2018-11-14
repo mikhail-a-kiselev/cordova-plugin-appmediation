@@ -6,6 +6,7 @@ repositories{
 }
 
 dependencies {
+    compile(name:'multidex-1.0.3', ext:'aar')
     compile(name:'appcompat-v7-26.1.0', ext:'aar')
 	compile(name:'adcolony-3.3.3', ext:'aar')
 	compile(name:'am-android-sdk-1.11.4', ext:'aar')
@@ -30,6 +31,6 @@ dependencies {
 
 android {
     packagingOptions {
-        pickFirst  '**'
+        pickFirst  'publicsuffixes.gz'
 	}
 }
