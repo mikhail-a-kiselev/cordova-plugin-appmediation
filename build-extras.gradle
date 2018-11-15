@@ -1,4 +1,5 @@
 android {
+    buildToolsVersion "28.0.3"
     defaultConfig {
         minSdkVersion 14
         multiDexEnabled true
@@ -29,12 +30,13 @@ android {
 		prod {
 			
 		}
+	}
 }
 
 dependencies {
     compile group: 'com.android.support', name: 'support-v4', version: '26.1.0'
 #    compile 'com.android.support:multidex:1.0.3'
-compile(name:'multidex-1.0.3', ext:'aar')
+#compile(name:'multidex-1.0.3', ext:'aar')
 	compile 'com.android.support:recyclerview-v7:26.1.0'
 	compile 'com.google.android.gms:play-services-ads:15.0.1'
 }

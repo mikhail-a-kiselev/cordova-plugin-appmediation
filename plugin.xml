@@ -38,7 +38,11 @@
 	
 	<resource-file src="libs/multidex-1.0.3.aar" target="libs/multidex-1.0.3.aar" />
 	
+	<resource-file src="libs/play-services-12.0.1.aar" target="libs/play-services-12.0.1.aar" />
+	
 	<resource-file src="libs/appcompat-v7-26.1.0.aar" target="libs/appcompat-v7-26.1.0.aar" />
+	
+	<resource-file src="libs/recyclerview-v7-26.1.0.aar" target="libs/recyclerview-v7-26.1.0.aar" />
 	
 	<resource-file src="libs/applovin-sdk-8.0.0.jar" target="libs/applovin-sdk-8.0.0.jar" />
 	<resource-file src="libs/chartboost-7.2.0.jar" target="libs/chartboost-7.2.0.jar" />
