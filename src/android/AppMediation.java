@@ -45,6 +45,47 @@ public class AppMediation extends CordovaPlugin {
 	@Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
+		AMBanner.setListener(new AMBannerListener() {
+			@Override 
+			public void onLoaded() {
+				Log.d("appmediation", "Banner ad onLoaded");
+			}
+			@Override
+			public void onFailed(AMError error) {
+				Log.d("appmediation", "Banner ad onFailed: " + error.name());
+			}
+			@Override
+			public void onShowed() {
+				Log.d("appmediation", "Banner ad onShowed");
+			}
+			@Override
+			public void onClicked() {
+				Log.d("appmediation", "Banner ad onClicked");
+			}
+		});
+		AMInterstitial.setListener(new AMListener() {
+			@Override
+			public void onLoaded() {
+				Log.d("appmediation", "Interstitial ad onLoaded");
+			}
+			@Override
+			public void onFailed(AMError error) {
+				Log.d("appmediation", "Interstitial ad onFailed: " + error.name());
+			}
+			@Override
+			public void onShowed() {
+				Log.d("appmediation", "Interstitial ad onShowed");
+			}
+			@Override
+			public void onClosed() {
+				Log.d("appmediation", "Interstitial ad onClosed");
+			}
+			@Override
+			public void onClicked() {
+				Log.d("appmediation", "Interstitial ad onClicked");
+			}
+		});
+		AMSDK.setAutoLoad(false);
 	};
 	
 	@Override
@@ -52,12 +93,19 @@ public class AppMediation extends CordovaPlugin {
         PluginResult result = null;
         if(INIT.equals(action)){
         	JSONObject options = inputs.optJSONObject(0);
+			Log.d("appmediation", "before init");
             result = initMediation(options, callbackContext);
-			Log.d("appmediation", "init");
+			Log.d("appmediation", "after init");
 			return true;
         } else if(LOAD_AD.equals(action)){
-			Log.d("appmediation", "load");
+			Log.d("appmediation", "before load");
 			AMBanner.show(cordova.getActivity(), Gravity.BOTTOM);
+			Log.d("appmediation", "after load");
+			return true;
+		} else if(LOAD_INTERSTITIAL.equals(action)){
+			Log.d("appmediation", "before interstitial loaded");
+			AMInterstitial.show(cordova.getActivity());
+			Log.d("appmediation", "after interstitial load");
 			return true;
 		} else {
 			return false;

@@ -23,5 +23,18 @@ exports.load = function(){
 		},
         "AppMediation",
         "load",
-        [opt]);
+        []);
+};
+
+exports.loadInterstitial = function(){
+	cordova.exec(
+        function(winParam) {
+			alert('load int success');
+		},
+        function(error) {
+			alert('load int fail');
+		},
+        "AppMediation",
+        "loadInterstitial",
+        []);
 };
