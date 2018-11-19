@@ -116,6 +116,9 @@ public class AppMediation extends CordovaPlugin {
 					@Override
 					public void onShowed() {
 						Log.d("appmediation", "Interstitial ad onShowed");
+						webView.loadUrl(String.format(
+							"javascript:cordova.fireDocumentEvent('onShowAMInterstitial', {  });" 
+						));
 					}
 					@Override
 					public void onClosed() {
