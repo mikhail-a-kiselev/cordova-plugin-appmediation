@@ -39,53 +39,12 @@ public class AppMediation extends CordovaPlugin {
 	private static final String REFRESH_BANNER_AD = "refreshBannerAd";
 	private static final String LOAD_AD = "load";
 	private static final String LOAD_INTERSTITIAL = "loadInterstitial";
-	private static final String SHOW_VIEW = "showView";
-	private static final String HIDE_VIEW = "hideView";
+	private static final String HIDE_AD = "hide";
 	
 	@Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
-		AMBanner.setListener(new AMBannerListener() {
-			@Override 
-			public void onLoaded() {
-				Log.d("appmediation", "Banner ad onLoaded");
-			}
-			@Override
-			public void onFailed(AMError error) {
-				Log.d("appmediation", "Banner ad onFailed: " + error.name());
-			}
-			@Override
-			public void onShowed() {
-				Log.d("appmediation", "Banner ad onShowed");
-			}
-			@Override
-			public void onClicked() {
-				Log.d("appmediation", "Banner ad onClicked");
-			}
-		});
-		AMInterstitial.setListener(new AMListener() {
-			@Override
-			public void onLoaded() {
-				Log.d("appmediation", "Interstitial ad onLoaded");
-			}
-			@Override
-			public void onFailed(AMError error) {
-				Log.d("appmediation", "Interstitial ad onFailed: " + error.name());
-			}
-			@Override
-			public void onShowed() {
-				Log.d("appmediation", "Interstitial ad onShowed");
-			}
-			@Override
-			public void onClosed() {
-				Log.d("appmediation", "Interstitial ad onClosed");
-			}
-			@Override
-			public void onClicked() {
-				Log.d("appmediation", "Interstitial ad onClicked");
-			}
-		});
-		AMSDK.setAutoLoad(false);
+
 	};
 	
 	@Override
@@ -99,15 +58,18 @@ public class AppMediation extends CordovaPlugin {
 			return true;
         } else if(LOAD_AD.equals(action)){
 			Log.d("appmediation", "before load");
-			AMBanner.show(cordova.getActivity(), Gravity.BOTTOM);
+			loadAd();
 			Log.d("appmediation", "after load");
 			return true;
 		} else if(LOAD_INTERSTITIAL.equals(action)){
 			Log.d("appmediation", "before interstitial loaded");
-			AMInterstitial.show(cordova.getActivity());
+			loadInterstitial();
 			Log.d("appmediation", "after interstitial load");
 			return true;
-		} else {
+		} else if(HIDE_AD.equals(action)) {
+			AMBanner.hide(cordova.getActivity());
+			return true;
+		}else {
 			return false;
 		}
 	}
@@ -117,12 +79,90 @@ public class AppMediation extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
-				AMSDK.setTestMode(true);
+				AMBanner.setListener(new AMBannerListener() {
+					@Override 
+					public void onLoaded() {
+						Log.d("appmediation", "Banner ad onLoaded");
+						webView.loadUrl(String.format(
+							"javascript:cordova.fireDocumentEvent('onSuccessAMBanner', { });" 
+						));
+					}
+					@Override
+					public void onFailed(AMError error) {
+						Log.d("appmediation", "Banner ad onFailed: " + error.name());
+						webView.loadUrl(String.format(
+                    "javascript:cordova.fireDocumentEvent('onFailAMBanner', {  });"
+						));
+					}
+					@Override
+					public void onShowed() {
+						Log.d("appmediation", "Banner ad onShowed");
+					}
+					@Override
+					public void onClicked() {
+						Log.d("appmediation", "Banner ad onClicked");
+					}
+				});
+				AMInterstitial.setListener(new AMListener() {
+					@Override
+					public void onLoaded() {
+						Log.d("appmediation", "Interstitial ad onLoaded");
+						webView.loadUrl(String.format(
+							"javascript:cordova.fireDocumentEvent('onSuccessAMInterstitial', { });" 
+						));
+						AMInterstitial.show(cordova.getActivity());
+					}
+					@Override
+					public void onFailed(AMError error) {
+						Log.d("appmediation", "Interstitial ad onFailed: " + error.name());
+						webView.loadUrl(String.format(
+							"javascript:cordova.fireDocumentEvent('onFailAMInterstitial', {  });" 
+						));
+					}
+					@Override
+					public void onShowed() {
+						Log.d("appmediation", "Interstitial ad onShowed");
+					}
+					@Override
+					public void onClosed() {
+						Log.d("appmediation", "Interstitial ad onClosed");
+					}
+					@Override
+					public void onClicked() {
+						Log.d("appmediation", "Interstitial ad onClicked");
+					}
+				});
+				AMSDK.setAutoLoad(false);
 				
-				AMSDK.init(cordova.getActivity(), "a1cdd0c4-de3b-421f-a7b3-5c264c16df91");//"a1cdd0c4-de3b-421f-a7b3-5c264c16df91" options.toString()
+				//AMSDK.setTestMode(true);
+				if(options != null && options.has("appkey")){
+					AMSDK.init(cordova.getActivity(), options.optString("appkey"));
+				} else {
+					AMSDK.init(cordova.getActivity(), "a1cdd0c4-de3b-421f-a7b3-5c264c16df91");
+				}
+				//"a1cdd0c4-de3b-421f-a7b3-5c264c16df91" options.toString()
 			}
 		});
 		
 		return null;
 	}
+	
+	private void loadAd(){
+    	cordova.getActivity().runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+            	AMBanner.show(cordova.getActivity(), Gravity.BOTTOM);
+            }
+    	});
+    }
+	
+	private void loadInterstitial(){
+    	cordova.getActivity().runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+				AMInterstitial.load(cordova.getActivity());
+            }
+    	});
+    }
+	
 }

@@ -25,6 +25,18 @@ exports.load = function(){
         "load",
         []);
 };
+exports.hide = function(){
+	cordova.exec(
+        function(winParam) {
+			
+		},
+        function(error) {
+			
+		},
+        "AppMediation",
+        "hide",
+        []);
+};
 
 exports.loadInterstitial = function(){
 	cordova.exec(
