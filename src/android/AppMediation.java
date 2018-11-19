@@ -52,19 +52,13 @@ public class AppMediation extends CordovaPlugin {
         PluginResult result = null;
         if(INIT.equals(action)){
         	JSONObject options = inputs.optJSONObject(0);
-			Log.d("appmediation", "before init");
             result = initMediation(options, callbackContext);
-			Log.d("appmediation", "after init");
 			return true;
         } else if(LOAD_AD.equals(action)){
-			Log.d("appmediation", "before load");
 			loadAd();
-			Log.d("appmediation", "after load");
 			return true;
 		} else if(LOAD_INTERSTITIAL.equals(action)){
-			Log.d("appmediation", "before interstitial loaded");
 			loadInterstitial();
-			Log.d("appmediation", "after interstitial load");
 			return true;
 		} else if(HIDE_AD.equals(action)) {
 			AMBanner.hide(cordova.getActivity());
