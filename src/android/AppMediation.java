@@ -73,6 +73,8 @@ public class AppMediation extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
+				AMSDK.showConsentAutomatically(false);
+				AMSDK.setGdprConsent(cordova.getActivity(), AMSDK.GdprConsent.AGREE);
 				AMBanner.setListener(new AMBannerListener() {
 					@Override 
 					public void onLoaded() {
